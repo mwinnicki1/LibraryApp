@@ -1,10 +1,13 @@
-﻿@model IEnumerable<LibraryApp.Models.Reader>
+﻿@model PagedList.IPagedList<LibraryApp.Models.Reader>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Readers";
 }
 
-<h2>Index</h2>
+<h2>Readers</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -16,7 +19,7 @@
         @Html.Label("Name:")
         @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control" })
         @Html.Label("ID:")
-        @Html.TextBox("IdSearchString", null, new { @class = "form-control" })
+        @Html.TextBox("IdSearchString", ViewBag.IdCurrentFilter as string, new { @class = "form-control" })
         <input type="submit" class="btn btn-primary mb-2" value="Search">
     </p>
 </div>
@@ -24,34 +27,34 @@
     <table class="table">
         <tr>
             <th>
-                @Html.ActionLink("ID", "Index", new { sortOrder = ViewBag.IdSortParm })
+                @Html.ActionLink("ID", "Index", new { sortOrder = ViewBag.IdSortParm, currentFilter = ViewBag.CurrentFilter })
             </th>
             <th>
-                @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm })
+                @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
             </th>
             <th>
-                @Html.ActionLink("Surname", "Index", new { sortOrder = ViewBag.SurnameSortParm })
+                @Html.ActionLink("Surname", "Index", new { sortOrder = ViewBag.SurnameSortParm, currentFilter = ViewBag.CurrentFilter })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Street)
+                Street
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.HouseNumber)
+                HouseNumber
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ApartmentNumber)
+                ApartmentNumber
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PostalCode)
+                PostalCode
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.City)
+                City
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PhoneNumber)
+                PhoneNumber
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
+                Email
             </th>
             <th></th>
         </tr>
@@ -98,3 +101,7 @@
         }
 
     </table>
+    <br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFIlter = ViewBag.CurrentFilter }))

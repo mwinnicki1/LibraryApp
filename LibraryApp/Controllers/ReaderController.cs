@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using LibraryApp.DAL;
 using LibraryApp.Models;
+using PagedList;
 
 namespace LibraryApp.Controllers
 {
@@ -16,11 +17,25 @@ namespace LibraryApp.Controllers
         private LibraryAppContext db = new LibraryAppContext();
 
         // GET: Reader
-        public ActionResult Index(string sortOrder, string searchString, int? idsearchstring)
+        public ActionResult Index(string sortOrder, string currentFilter, int? idcurrentFilter, string searchString, int? idsearchstring, int? page)
         {
+            ViewBag.CurrentSort = sortOrder;
             ViewBag.IdSortParm = String.IsNullOrEmpty(sortOrder) ? "id_desc" : "";
             ViewBag.NameSortParm = sortOrder == "Name" ? "name_desc" : "Name";
             ViewBag.SurnameSortParm = sortOrder == "Surname" ? "surname_desc" : "Surname";
+
+            if(searchString != null || idsearchstring != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+                idsearchstring = idcurrentFilter;
+            }
+            ViewBag.CurrentFilter = searchString;
+            ViewBag.IdCurrentFilter = idsearchstring;
+
             var readers = from s in db.Readers
                           select s;
             if(!String.IsNullOrEmpty(searchString))
@@ -48,8 +63,13 @@ namespace LibraryApp.Controllers
                 case "surname_desc":
                     readers = readers.OrderByDescending(s => s.Surname);
                     break;
+                default:
+                    readers = readers.OrderBy(s => s.ID);
+                    break;
             }
-            return View(readers.ToList());
+            int pageSize = 1;
+            int pageNumber = (page ?? 1);
+            return View(readers.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Reader/Details/5
