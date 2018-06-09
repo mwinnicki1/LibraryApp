@@ -67,7 +67,7 @@ namespace LibraryApp.Controllers
                     readers = readers.OrderBy(s => s.ID);
                     break;
             }
-            int pageSize = 1;
+            int pageSize = 5;
             int pageNumber = (page ?? 1);
             return View(readers.ToPagedList(pageNumber, pageSize));
         }
