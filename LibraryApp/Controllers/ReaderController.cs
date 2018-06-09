@@ -16,9 +16,32 @@ namespace LibraryApp.Controllers
         private LibraryAppContext db = new LibraryAppContext();
 
         // GET: Reader
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
-            return View(db.Readers.ToList());
+            ViewBag.IdSortParm = String.IsNullOrEmpty(sortOrder) ? "id_desc" : "";
+            ViewBag.NameSortParm = sortOrder == "Name" ? "name_desc" : "Name";
+            ViewBag.SurnameSortParm = sortOrder == "Surname" ? "surname_desc" : "Surname";
+            var readers = from s in db.Readers
+                          select s;
+            switch(sortOrder)
+            {
+                case "id_desc":
+                    readers = readers.OrderByDescending(s => s.ID);
+                    break;
+                case "Name":
+                    readers = readers.OrderBy(s => s.Name);
+                    break;
+                case "name_desc":
+                    readers = readers.OrderByDescending(s => s.Name);
+                    break;
+                case "Surname":
+                    readers = readers.OrderBy(s => s.Surname);
+                    break;
+                case "surname_desc":
+                    readers = readers.OrderByDescending(s => s.Surname);
+                    break;
+            }
+            return View(readers.ToList());
         }
 
         // GET: Reader/Details/5
