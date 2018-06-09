@@ -17,6 +17,9 @@ namespace LibraryApp.DAL
         }
 
         public DbSet<Reader> Readers { get; set; }
+        public DbSet<Book> Books { get; set; }
+        public DbSet<Borrow> Borrows { get; set; }
+        public DbSet<BorrowBook> BorrowBooks { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

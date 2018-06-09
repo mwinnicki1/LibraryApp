@@ -160,6 +160,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BookController.cs" />
+    <Compile Include="Controllers\BorrowBookController.cs" />
+    <Compile Include="Controllers\BorrowController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReaderController.cs" />
     <Compile Include="DAL\LibraryAppContext.cs" />
@@ -170,6 +173,10 @@
     <Compile Include="Migrations\201806091200564_InitialCreate.cs" />
     <Compile Include="Migrations\201806091200564_InitialCreate.Designer.cs">
       <DependentUpon>201806091200564_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806091239578_Borrows.cs" />
+    <Compile Include="Migrations\201806091239578_Borrows.Designer.cs">
+      <DependentUpon>201806091239578_Borrows.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Book.cs" />
@@ -222,6 +229,21 @@
     <Content Include="Views\Reader\Details.cshtml" />
     <Content Include="Views\Reader\Edit.cshtml" />
     <Content Include="Views\Reader\Index.cshtml" />
+    <Content Include="Views\Book\Create.cshtml" />
+    <Content Include="Views\Book\Delete.cshtml" />
+    <Content Include="Views\Book\Details.cshtml" />
+    <Content Include="Views\Book\Edit.cshtml" />
+    <Content Include="Views\Book\Index.cshtml" />
+    <Content Include="Views\Borrow\Create.cshtml" />
+    <Content Include="Views\Borrow\Delete.cshtml" />
+    <Content Include="Views\Borrow\Details.cshtml" />
+    <Content Include="Views\Borrow\Edit.cshtml" />
+    <Content Include="Views\Borrow\Index.cshtml" />
+    <Content Include="Views\BorrowBook\Create.cshtml" />
+    <Content Include="Views\BorrowBook\Delete.cshtml" />
+    <Content Include="Views\BorrowBook\Details.cshtml" />
+    <Content Include="Views\BorrowBook\Edit.cshtml" />
+    <Content Include="Views\BorrowBook\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -242,6 +264,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201806091200564_InitialCreate.resx">
       <DependentUpon>201806091200564_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806091239578_Borrows.resx">
+      <DependentUpon>201806091239578_Borrows.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
