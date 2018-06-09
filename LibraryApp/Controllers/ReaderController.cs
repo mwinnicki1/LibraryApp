@@ -16,13 +16,21 @@ namespace LibraryApp.Controllers
         private LibraryAppContext db = new LibraryAppContext();
 
         // GET: Reader
-        public ActionResult Index(string sortOrder)
+        public ActionResult Index(string sortOrder, string searchString, int? idsearchstring)
         {
             ViewBag.IdSortParm = String.IsNullOrEmpty(sortOrder) ? "id_desc" : "";
             ViewBag.NameSortParm = sortOrder == "Name" ? "name_desc" : "Name";
             ViewBag.SurnameSortParm = sortOrder == "Surname" ? "surname_desc" : "Surname";
             var readers = from s in db.Readers
                           select s;
+            if(!String.IsNullOrEmpty(searchString))
+            {
+                readers = readers.Where(s => s.Name.Contains(searchString) || s.Surname.Contains(searchString));
+            }
+            if(idsearchstring != null)
+            {
+                readers = readers.Where(s => s.ID == (idsearchstring));
+            }
             switch(sortOrder)
             {
                 case "id_desc":
