@@ -172,7 +172,9 @@
       <DependentUpon>201806091200564_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Borrow.cs" />
+    <Compile Include="Models\BorrowBook.cs" />
     <Compile Include="Models\Reader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

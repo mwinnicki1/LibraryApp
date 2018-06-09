@@ -6,12 +6,12 @@ using System.Web;
 
 namespace LibraryApp.Models
 {
-    public class Borrow
+    public class Book
     {
         [Key]
         public int Id { get; set; }
-        public DateTime BorrowDate { get; set; }
-        public int ReaderId { get; set; }
-        public virtual Reader Reader { get; set; }
+        public string Title { get; set; }
+        
+
     }
 }
