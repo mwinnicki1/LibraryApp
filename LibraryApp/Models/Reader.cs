@@ -30,6 +30,10 @@ namespace LibraryApp.Models
         [Display(Name = "Postal code")]
         public string PostalCode { get; set; }
 
+        
+        
+        public string PostalCode2 { get; set; }
+
         [Required]
         [Display(Name = "City")]
         public string City { get; set; }

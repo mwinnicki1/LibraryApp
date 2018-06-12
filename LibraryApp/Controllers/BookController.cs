@@ -18,7 +18,8 @@ namespace LibraryApp.Controllers
         // GET: Book
         public ActionResult Index()
         {
-            return View(db.Books.ToList());
+            var books = db.Books.Include(b => b.Reader);
+            return View(books.ToList());
         }
 
         // GET: Book/Details/5
@@ -39,6 +40,7 @@ namespace LibraryApp.Controllers
         // GET: Book/Create
         public ActionResult Create()
         {
+            ViewBag.ReaderId = new SelectList(db.Readers, "ID", "Name");
             return View();
         }
 
@@ -47,7 +49,7 @@ namespace LibraryApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title")] Book book)
+        public ActionResult Create([Bind(Include = "Id,Author,Title,Publisher,PublishingDate,Isbn,BorrowDate,ReaderId")] Book book)
         {
             if (ModelState.IsValid)
             {
@@ -56,6 +58,7 @@ namespace LibraryApp.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.ReaderId = new SelectList(db.Readers, "ID", "Name", book.ReaderId);
             return View(book);
         }
 
@@ -71,6 +74,7 @@ namespace LibraryApp.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.ReaderId = new SelectList(db.Readers, "ID", "Name", book.ReaderId);
             return View(book);
         }
 
@@ -79,7 +83,7 @@ namespace LibraryApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title")] Book book)
+        public ActionResult Edit([Bind(Include = "Id,Author,Title,Publisher,PublishingDate,Isbn,BorrowDate,ReaderId")] Book book)
         {
             if (ModelState.IsValid)
             {
@@ -87,6 +91,7 @@ namespace LibraryApp.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.ReaderId = new SelectList(db.Readers, "ID", "Name", book.ReaderId);
             return View(book);
         }
 
