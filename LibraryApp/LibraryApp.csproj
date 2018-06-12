@@ -178,6 +178,10 @@
     <Compile Include="Migrations\201806091239578_Borrows.Designer.cs">
       <DependentUpon>201806091239578_Borrows.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806121606155_reverse.cs" />
+    <Compile Include="Migrations\201806121606155_reverse.Designer.cs">
+      <DependentUpon>201806121606155_reverse.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Borrow.cs" />
@@ -267,6 +271,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806091239578_Borrows.resx">
       <DependentUpon>201806091239578_Borrows.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806121606155_reverse.resx">
+      <DependentUpon>201806121606155_reverse.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

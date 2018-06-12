@@ -1,6 +1,6 @@
 ﻿@model PagedList.IPagedList<LibraryApp.Models.Reader>
 @using PagedList.Mvc;
-<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<link href="#" rel="stylesheet" type="text/css" />
 
 
 @{
@@ -104,4 +104,4 @@
     <br />
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFIlter = ViewBag.CurrentFilter }))
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFIlter = ViewBag.CurrentFilter, @class = "pagination" } ))
