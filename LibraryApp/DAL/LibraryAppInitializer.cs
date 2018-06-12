@@ -14,7 +14,7 @@ namespace LibraryApp.DAL
         {
             var readers = new List<Reader>
             {
-                new Reader {Name="Rafał",Surname="Wojtas",Street="Nad Przyrwą",HouseNumber="13",ApartmentNumber="201",PostalCode="35-234",City="Rzeszów",PhoneNumber="500600700",Email="r.wojtas@ideo.pl"}
+                new Reader {Name="Rafał",Street="Nad Przyrwą",HouseNumber="13",ApartmentNumber="201",PostalCode="35-234",City="Rzeszów",PhoneNumber="500600700",Email="r.wojtas@ideo.pl"}
             };
 
             readers.ForEach(s => context.Readers.Add(s));

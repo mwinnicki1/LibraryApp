@@ -40,7 +40,7 @@ namespace LibraryApp.Controllers
                           select s;
             if(!String.IsNullOrEmpty(searchString))
             {
-                readers = readers.Where(s => s.Name.Contains(searchString) || s.Surname.Contains(searchString));
+                readers = readers.Where(s => s.Name.Contains(searchString));
             }
             if(idsearchstring != null)
             {
@@ -56,12 +56,6 @@ namespace LibraryApp.Controllers
                     break;
                 case "name_desc":
                     readers = readers.OrderByDescending(s => s.Name);
-                    break;
-                case "Surname":
-                    readers = readers.OrderBy(s => s.Surname);
-                    break;
-                case "surname_desc":
-                    readers = readers.OrderByDescending(s => s.Surname);
                     break;
                 default:
                     readers = readers.OrderBy(s => s.ID);

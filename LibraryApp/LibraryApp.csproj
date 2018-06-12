@@ -161,8 +161,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BookController.cs" />
-    <Compile Include="Controllers\BorrowBookController.cs" />
-    <Compile Include="Controllers\BorrowController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReaderController.cs" />
     <Compile Include="DAL\LibraryAppContext.cs" />
@@ -182,10 +180,12 @@
     <Compile Include="Migrations\201806121606155_reverse.Designer.cs">
       <DependentUpon>201806121606155_reverse.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806121823457_updatedmodels.cs" />
+    <Compile Include="Migrations\201806121823457_updatedmodels.Designer.cs">
+      <DependentUpon>201806121823457_updatedmodels.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Book.cs" />
-    <Compile Include="Models\Borrow.cs" />
-    <Compile Include="Models\BorrowBook.cs" />
     <Compile Include="Models\Reader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -274,6 +274,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806121606155_reverse.resx">
       <DependentUpon>201806121606155_reverse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806121823457_updatedmodels.resx">
+      <DependentUpon>201806121823457_updatedmodels.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
