@@ -137,6 +137,11 @@ namespace LibraryApp.Controllers
                 TempData["sErrMsg"] = "Testowa wartosc";
                 return RedirectToAction("Index");
             }
+            if(book.ReturnDate == null)
+            {
+                TempData["sErrMsg"] = "Testowa wartosc2";
+                return RedirectToAction("Index");
+            }
             return View(book);
         }
 
