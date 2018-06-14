@@ -36,6 +36,11 @@ namespace LibraryApp.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? BorrowDate { get; set; }
 
+        [DataType(DataType.Date)]
+        [Display(Name = "Expected return date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime? ReturnDate { get; set; }
+
         [Display(Name = "Reader")]
         public int? ReaderId { get; set; }
 

@@ -83,7 +83,7 @@ namespace LibraryApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Author,Title,Publisher,PublishingDate,Isbn,BorrowDate,ReaderId")] Book book)
+        public ActionResult Edit([Bind(Include = "Id,Author,Title,Publisher,PublishingDate,Isbn,BorrowDate,ReturnDate,ReaderId")] Book book)
         {
             if (ModelState.IsValid)
             {
@@ -119,6 +119,42 @@ namespace LibraryApp.Controllers
             db.Books.Remove(book);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult ReturnBook(int? id)
+        {
+            if(id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+            }
+            Book book = db.Books.Find(id);
+            if(book == null)
+            {
+                return HttpNotFound();
+            }
+            if(book.ReaderId == null)
+            {
+                TempData["sErrMsg"] = "Testowa wartosc";
+                return RedirectToAction("Index");
+            }
+            return View(book);
+        }
+
+        [HttpPost, ActionName("ReturnBook")]
+        [ValidateAntiForgeryToken]
+        public ActionResult ReturnConfirmed(int id)
+        {
+            var book = db.Books.Where(b => b.Id == id).Single();
+            book.ReaderId = null;
+            book.BorrowDate = null;
+            book.ReturnDate = null;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public PartialViewResult ShowError(String sErrorMessage)
+        {
+            return PartialView("ErrorMessageView");
         }
 
         protected override void Dispose(bool disposing)
