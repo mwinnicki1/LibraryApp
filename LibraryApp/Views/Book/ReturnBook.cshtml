@@ -59,6 +59,14 @@
             @Html.DisplayFor(model => model.BorrowDate)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.ReturnDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReturnDate)
+        </dd>
+
         @{ 
             DateTime today = DateTime.Today;
             DateTime rdate = (DateTime)Model.ReturnDate;
@@ -70,7 +78,8 @@
                 </dt>
 
                 <dd>
-                    @(difference*2),00 PLN
+                    @(difference * 2),00 PLN
+
                 </dd>
             }
         }
