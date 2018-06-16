@@ -100,7 +100,7 @@ namespace LibraryApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Author,Title,Publisher,PublishingDate,Isbn,BorrowDate,ReaderId")] Book book)
+        public ActionResult Create([Bind(Include = "Id,Author,Title,Publisher,PublishingDate,Isbn,BorrowDate,ReturnDate,ReaderId")] Book book)
         {
             if (ModelState.IsValid)
             {
@@ -135,6 +135,46 @@ namespace LibraryApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Author,Title,Publisher,PublishingDate,Isbn,BorrowDate,ReturnDate,ReaderId")] Book book)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(book).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.ReaderId = new SelectList(db.Readers, "ID", "Name", book.ReaderId);
+            return View(book);
+        }
+
+        // GET: Book/Edit/5
+        public ActionResult Borrow(int? id)
+        {
+            Book book = db.Books.Find(id);
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            if (book.ReaderId != null)
+            {
+                TempData["sErrMsg"] = "The chosen book is already borrowed by some reader at the moment.";
+                return RedirectToAction("Index");
+            }
+            if (book == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.ReaderId = new SelectList(db.Readers, "ID", "Name", book.ReaderId);
+            return View(book);
+        }
+
+        // POST: Book/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Borrow([Bind(Include = "Id,Author,Title,Publisher,PublishingDate,Isbn,BorrowDate,ReturnDate,ReaderId")] Book book)
         {
             if (ModelState.IsValid)
             {
