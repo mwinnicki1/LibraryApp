@@ -122,7 +122,7 @@
                     @item.ReturnDate
                 </td>
                 <td>
-                    @Html.ActionLink("Return", "ReturnBook", new { id = item.Id })
+                    @Html.ActionLink("Return", "ReturnBook", "Book", new { id = item.Id }, null)
                 </td>
             </tr>
         </table>
