@@ -76,7 +76,59 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<h4>Borrowed books</h4>
+<hr />
+<dl class="dl-horizontal">
+
+    @foreach (var item in Model.Books)
+    {
+        <table class="table">
+            <tr>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Author
+                </th>
+                <th>
+                    ISBN
+                </th>
+                <th>
+                    Borrow date
+                </th>
+                <th>
+                    Expected return date
+                </th>
+                <th>
+
+                </th>
+            </tr>
+
+            <tr>
+                <td>
+                    @item.Title
+                </td>
+                <td>
+                    @item.Author
+                </td>
+                <td>
+                    @item.Isbn
+                </td>
+                <td>
+                    @item.BorrowDate
+                </td>
+                <td>
+                    @item.ReturnDate
+                </td>
+                <td>
+                    @Html.ActionLink("Return", "ReturnBook", new { id = item.Id })
+                </td>
+            </tr>
+        </table>
+    }
+
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
