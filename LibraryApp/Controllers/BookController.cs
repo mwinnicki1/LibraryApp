@@ -185,12 +185,12 @@ namespace LibraryApp.Controllers
             }
             if(book.ReaderId == null)
             {
-                TempData["sErrMsg"] = "Testowa wartosc";
+                TempData["sErrMsg"] = "The chosen book is not borrowed by any reader at the moment.";
                 return RedirectToAction("Index");
             }
             if(book.ReturnDate == null)
             {
-                TempData["sErrMsg"] = "Testowa wartosc2";
+                TempData["sErrMsg"] = "Expected return date is missing for the chosen book. Please edit book and provide expected return date.";
                 return RedirectToAction("Index");
             }
             return View(book);
