@@ -80,31 +80,29 @@
 <h4>Borrowed books</h4>
 <hr />
 <dl class="dl-horizontal">
+    <table class="table">
+        <tr>
+            <th>
+                Title
+            </th>
+            <th>
+                Author
+            </th>
+            <th>
+                ISBN
+            </th>
+            <th>
+                Borrow date
+            </th>
+            <th>
+                Expected return date
+            </th>
+            <th>
 
-    @foreach (var item in Model.Books)
-    {
-        <table class="table">
-            <tr>
-                <th>
-                    Title
-                </th>
-                <th>
-                    Author
-                </th>
-                <th>
-                    ISBN
-                </th>
-                <th>
-                    Borrow date
-                </th>
-                <th>
-                    Expected return date
-                </th>
-                <th>
-
-                </th>
-            </tr>
-
+            </th>
+        </tr>
+        @foreach (var item in Model.Books)
+        {
             <tr>
                 <td>
                     @item.Title
@@ -125,8 +123,8 @@
                     @Html.ActionLink("Return", "ReturnBook", "Book", new { id = item.Id }, null)
                 </td>
             </tr>
+        }
         </table>
-    }
 
     <p>
         @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
