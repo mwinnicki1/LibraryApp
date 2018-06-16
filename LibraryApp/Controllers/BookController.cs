@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using LibraryApp.DAL;
 using LibraryApp.Models;
+using PagedList;
 
 namespace LibraryApp.Controllers
 {
@@ -16,15 +17,36 @@ namespace LibraryApp.Controllers
         private LibraryAppContext db = new LibraryAppContext();
 
         // GET: Book
-        public ActionResult Index(string sortOrder, string searchString)
+        public ActionResult Index(string sortOrder, string titlesearchString, string authorsearchString, int? page, string titlecurrentFilter, string authorcurrentFilter)
         {
             ViewBag.TitleSortParm = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
             ViewBag.AuthorSortParm = sortOrder == "Author" ? "author_desc" : "Author";
             ViewBag.BorrowDateSortParm = sortOrder == "BorrowDate" ? "borrowdate_desc" : "BorrowDate";
 
+            if (titlesearchString != null || authorsearchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                titlesearchString = titlecurrentFilter;
+                authorsearchString = authorcurrentFilter;
+            }
+            ViewBag.TitleCurrentFilter = titlesearchString;
+            ViewBag.AuthorCurrentFilter = authorsearchString;
+
             var books = db.Books.Include(b => b.Reader);
 
-            switch(sortOrder)
+            if (!String.IsNullOrEmpty(titlesearchString))
+            {
+                books = books.Where(s => s.Title.Contains(titlesearchString));
+            }
+            if (authorsearchString != null)
+            {
+                books = books.Where(s => s.Author.Contains(authorsearchString));
+            }
+
+            switch (sortOrder)
             {
                 case "title_desc":
                     books = books.OrderByDescending(b => b.Title);
@@ -46,8 +68,9 @@ namespace LibraryApp.Controllers
                     break;
 
             }
-
-            return View(books.ToList());
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(books.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Book/Details/5

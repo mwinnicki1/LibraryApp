@@ -1,7 +1,9 @@
-﻿@model IEnumerable<LibraryApp.Models.Book>
+﻿@model PagedList.IPagedList<LibraryApp.Models.Book>
+@using PagedList.Mvc;
+<link href="#" rel="stylesheet" type="text/css" />
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Books";
 }
 
 @if (TempData["sErrMsg"] != null)
@@ -14,63 +16,77 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@using (Html.BeginForm("Index", "Book", FormMethod.Get))
+{
+    <div class="form-inline">
+        <p>
+            @Html.Label("Title:")
+            @Html.TextBox("TitleSearchString", ViewBag.TitleCurrentFilter as string, new { @class = "form-control" })
+            @Html.Label("Author:")
+            @Html.TextBox("AuthorSearchString", ViewBag.AuthorCurrentFilter as string, new { @class = "form-control" })
+            <input type="submit" class="btn btn-primary mb-2" value="Search">
+        </p>
+    </div>
+}
+
 <table class="table">
     <tr>
         <th>
-            @Html.ActionLink("Author", "Index", new { sortOrder = ViewBag.AuthorSortParm })
+            @Html.ActionLink("Title", "Index", new { sortOrder = ViewBag.TitleSortParm, titlecurrentFilter = ViewBag.TitleCurrentFilter, authorcurrentFilter = ViewBag.AuthorCurrentFilter })
         </th>
         <th>
-            @Html.ActionLink("Title", "Index", new { sortOrder = ViewBag.TitleSortParm })
+            @Html.ActionLink("Author", "Index", new { sortOrder = ViewBag.AuthorSortParm, titlecurrentFilter = ViewBag.TitleCurrentFilter, authorcurrentFilter = ViewBag.AuthorCurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Publisher)
+            Publisher
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PublishingDate)
+            Publishing date
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Isbn)
+            ISBN
         </th>
         <th>
             Borrowed by
         </th>
         <th>
-            @Html.ActionLink("Borrow date", "Index", new { sortOrder = ViewBag.BorrowDateSortParm })
+            @Html.ActionLink("Borrow date", "Index", new { sortOrder = ViewBag.BorrowDateSortParm, titlecurrentFilter = ViewBag.TitleCurrentFilter, authorcurrentFilter = ViewBag.AuthorCurrentFilter })
         </th>
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Author)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Publisher)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PublishingDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Isbn)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Reader.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BorrowDate)
-        </td>
-        <td>
-            @Html.ActionLink("Return", "ReturnBook", new { id = item.Id }) |
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-        </td>
-    </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Publisher)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PublishingDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Isbn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reader.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BorrowDate)
+            </td>
+            <td>
+                @Html.ActionLink("Return", "ReturnBook", new { id = item.Id }) |
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
 
 
 
@@ -79,3 +95,7 @@
     }
 
 </table>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, titlecurrentFilter = ViewBag.TitleCurrentFilter, authorcurrentFilter = ViewBag.AuthorCurrentFilter }))

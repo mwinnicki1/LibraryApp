@@ -27,13 +27,13 @@
     <table class="table">
         <tr>
             <th>
-                @Html.ActionLink("ID", "Index", new { sortOrder = ViewBag.IdSortParm, currentFilter = ViewBag.CurrentFilter })
+                @Html.ActionLink("ID", "Index", new { sortOrder = ViewBag.IdSortParm, currentFilter = ViewBag.CurrentFilter, idcurrentFilter = ViewBag.IdCurrentFilter })
             </th>
             <th>
-                @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+                @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter, idcurrentFilter = ViewBag.IdCurrentFilter })
             </th>
             <th>
-                @Html.ActionLink("Surname", "Index", new { sortOrder = ViewBag.SurnameSortParm, currentFilter = ViewBag.CurrentFilter })
+                @Html.ActionLink("Surname", "Index", new { sortOrder = ViewBag.SurnameSortParm, currentFilter = ViewBag.CurrentFilter, idcurrentFilter = ViewBag.IdCurrentFilter })
             </th>
             <th>
                 Street
@@ -101,4 +101,4 @@
     <br />
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFIlter = ViewBag.CurrentFilter, @class = "pagination" } ))
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFIlter = ViewBag.CurrentFilter, idcurrentFilter = ViewBag.IdCurrentFilter, @class = "pagination" } ))
