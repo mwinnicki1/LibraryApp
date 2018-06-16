@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using LibraryApp.DAL;
 using LibraryApp.Models;
+using LibraryApp.ViewModel;
 using PagedList;
 
 namespace LibraryApp.Controllers
@@ -159,6 +160,20 @@ namespace LibraryApp.Controllers
             db.Readers.Remove(reader);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult BorrowList()
+        {
+            LibraryAppContext dbContext = new LibraryAppContext();
+
+            DateTime today = DateTime.Today;
+
+            var viewmodelResult = from p in dbContext.Readers
+                                  join k in dbContext.Books on p.ID equals k.ReaderId
+                                  where k.ReaderId != null && k.ReturnDate < today
+                                  select new BorrowIndex { reader = p, book = k };
+
+            return View(viewmodelResult);
         }
 
         protected override void Dispose(bool disposing)

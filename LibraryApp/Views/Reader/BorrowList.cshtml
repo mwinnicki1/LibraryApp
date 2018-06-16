@@ -1,0 +1,93 @@
+﻿@model IEnumerable<LibraryApp.ViewModel.BorrowIndex>
+@{
+    ViewBag.Title = "Borrow list";
+}
+
+<h2>Borrow list</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Reader
+        </th>
+        <th>
+            Title
+        </th>
+        <th>
+            Author
+        </th>
+        <th>
+            Borrow date
+        </th>
+        <th>
+            Expected return date
+        </th>
+        <th>
+            Delay
+        </th>
+        <th>
+            Charge
+        </th>
+        <th>
+            Phone number
+        </th>
+        <th>
+            E-mail
+        </th>
+
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.reader.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.book.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.book.Author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.book.BorrowDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.book.ReturnDate)
+            </td>
+            
+                @{ 
+                    DateTime today = DateTime.Today;
+                    DateTime rdate = (DateTime)item.book.ReturnDate;
+                    int difference = (today - rdate).Days;
+                    if((today-rdate).Days > 0)
+                    {
+                        <td>
+                            @((today - rdate).Days) days
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            0 days
+                        </td>
+                    }
+
+                        <td>
+                            @(difference * 2),00 PLN
+                        </td>
+                }
+
+            <td>
+                @Html.DisplayFor(modelItem => item.reader.PhoneNumber)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.reader.Email)
+            </td>
+            
+        </tr>
+    }
+</table>
