@@ -16,9 +16,37 @@ namespace LibraryApp.Controllers
         private LibraryAppContext db = new LibraryAppContext();
 
         // GET: Book
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString)
         {
+            ViewBag.TitleSortParm = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
+            ViewBag.AuthorSortParm = sortOrder == "Author" ? "author_desc" : "Author";
+            ViewBag.BorrowDateSortParm = sortOrder == "BorrowDate" ? "borrowdate_desc" : "BorrowDate";
+
             var books = db.Books.Include(b => b.Reader);
+
+            switch(sortOrder)
+            {
+                case "title_desc":
+                    books = books.OrderByDescending(b => b.Title);
+                    break;
+                case "Author":
+                    books = books.OrderBy(b => b.Author);
+                    break;
+                case "author_desc":
+                    books = books.OrderByDescending(b => b.Author);
+                    break;
+                case "BorrowDate":
+                    books = books.OrderBy(b => b.BorrowDate);
+                    break;
+                case "borrowdate_desc":
+                    books = books.OrderByDescending(b => b.BorrowDate);
+                    break;
+                default:
+                    books = books.OrderBy(b => b.Title);
+                    break;
+
+            }
+
             return View(books.ToList());
         }
 

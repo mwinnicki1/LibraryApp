@@ -17,10 +17,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Author)
+            @Html.ActionLink("Author", "Index", new { sortOrder = ViewBag.AuthorSortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Title)
+            @Html.ActionLink("Title", "Index", new { sortOrder = ViewBag.TitleSortParm })
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Publisher)
@@ -35,7 +35,7 @@
             Borrowed by
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.BorrowDate)
+            @Html.ActionLink("Borrow date", "Index", new { sortOrder = ViewBag.BorrowDateSortParm })
         </th>
         <th></th>
     </tr>
