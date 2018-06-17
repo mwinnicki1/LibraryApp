@@ -28,6 +28,18 @@ namespace LibraryApp.Migrations
             };
             readers.ForEach(s => context.Readers.AddOrUpdate(p => p.Name, s));
             context.SaveChanges();
+
+            var books = new List<Book>
+            {
+                new Book {Author = "Witold Gombrowicz", Title = "Ferdydurke", Publisher = "Wydawnictwo Literackie", PublishingDate = DateTime.Parse("2016-03-16"), Isbn = "9788308049112" },
+                new Book {Author = "Andrzej Pilipuk", Title = "Kroniki Jakuba Wêdrowycza", Publisher = "Fabryka S³ów", PublishingDate = DateTime.Parse("2011-01-01"), Isbn = "9788375745092" },
+                new Book {Author = "Henryk Sienkiewicz", Title = "Krzy¿acy", Publisher = "Wydawnictwo Literackie", PublishingDate = DateTime.Parse("2012-01-12"), Isbn = "9788308060254" },
+                new Book {Author = "J.K. Rowling", Title = "Harry Potter i Kamieñ Filozoficzny", Publisher = "Media Rodzina", PublishingDate = DateTime.Parse("2016-01-01"), Isbn = "9788380082113" },
+                new Book {Author = "Olga Tokarczuk ", Title = "Bieguni ", Publisher = "Wydawnictwo Literackie", PublishingDate = DateTime.Parse("2018-06-07"), Isbn = "9788308055946" }
+                
+            };
+            books.ForEach(s => context.Books.AddOrUpdate(p => p.Title, s));
+            context.SaveChanges();
         }
     }
 }

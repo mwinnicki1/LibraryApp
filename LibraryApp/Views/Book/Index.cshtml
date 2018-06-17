@@ -41,12 +41,12 @@
         <th>
             Publisher
         </th>
-        <th>
+        @*<th>
             Publishing date
-        </th>
-        <th>
+        </th>*@
+        @*<th>
             ISBN
-        </th>
+        </th>*@
         <th>
             Borrowed by
         </th>
@@ -68,12 +68,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Publisher)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.PublishingDate)
-            </td>
-            <td>
+            </td>*@
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Isbn)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Reader.Name)
             </td>

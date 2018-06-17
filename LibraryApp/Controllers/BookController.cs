@@ -19,6 +19,7 @@ namespace LibraryApp.Controllers
         // GET: Book
         public ActionResult Index(string sortOrder, string titlesearchString, string authorsearchString, int? page, string titlecurrentFilter, string authorcurrentFilter)
         {
+            ViewBag.CurrentSort = sortOrder;
             ViewBag.TitleSortParm = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
             ViewBag.AuthorSortParm = sortOrder == "Author" ? "author_desc" : "Author";
             ViewBag.BorrowDateSortParm = sortOrder == "BorrowDate" ? "borrowdate_desc" : "BorrowDate";
