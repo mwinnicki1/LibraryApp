@@ -267,6 +267,7 @@
     <Content Include="Views\Book\ErrorMessageView.cshtml" />
     <Content Include="Views\Reader\BorrowList.cshtml" />
     <Content Include="Views\Book\Borrow.cshtml" />
+    <Content Include="Views\Reader\ErrorMessageView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

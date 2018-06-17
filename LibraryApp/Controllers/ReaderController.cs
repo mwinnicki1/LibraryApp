@@ -156,9 +156,21 @@ namespace LibraryApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Reader reader = db.Readers.Find(id);
-            db.Readers.Remove(reader);
-            db.SaveChanges();
+            try
+            {
+                Reader reader = db.Readers.Find(id);
+                db.Readers.Remove(reader);
+                db.SaveChanges();
+            }
+
+            catch(DataException)
+            {
+                TempData["sErrMsg"] = "You can't delete reader who currently borrows books";
+                return RedirectToAction("Delete");
+            }
+            
+
+
             return RedirectToAction("Index");
         }
 
