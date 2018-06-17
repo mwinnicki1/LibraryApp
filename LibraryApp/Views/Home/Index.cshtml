@@ -2,32 +2,32 @@
     ViewBag.Title = "Home Page";
 }
 
+
 <div class="jumbotron">
-    <h1>Library Management App</h1>
-    <p class="lead">Placeholder</p>
-    <p><a href="#" class="btn btn-primary btn-lg">Placeholder &raquo;</a></p>
+    <h2>Welcome</h2>
+    <p class="lead">Library Management App is a simple web application which allows you to register and track book borrowing. Use top menu to navigate between subpages.</p>
 </div>
 
 <div class="row">
     <div class="col-md-4">
-        <h2>Lorem ipsum</h2>
+        <h2>Readers</h2>
         <p>
-            Placeholder
+            Readers subpage allows you to keep a record of borrowers.
         </p>
-        <p><a class="btn btn-default" href="#">Click &raquo;</a></p>
+        @Html.ActionLink("Open", "Index", "Reader", null, new { @class = "btn btn-default btn-sm" })
     </div>
     <div class="col-md-4">
-        <h2>Lorem ipsum</h2>
+        <h2>Books</h2>
         <p>
-            Placeholder
+            Books subpage allows you to store list of books and register book borrows/returns.
         </p>
-        <p><a class="btn btn-default" href="#">Click &raquo;</a></p>
+        @Html.ActionLink("Open", "Index", "Book", null, new { @class = "btn btn-default btn-sm" })
     </div>
     <div class="col-md-4">
-        <h2>Lorem ipsum</h2>
+        <h2>Debtors</h2>
         <p>
-            Placeholder
-        </p>
-        <p><a class="btn btn-default" href="#">Click &raquo;</a></p>
+            This page lists all readers who delay with return of book.
+        </p>        
+        @Html.ActionLink("Open", "BorrowList", "Reader", null, new { @class = "btn btn-default btn-sm" })
     </div>
 </div>
