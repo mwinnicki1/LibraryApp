@@ -11,13 +11,17 @@
     <h4>Book</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Reader.Name)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Reader.Name)
-        </dd>
+        @if (Model.ReaderId != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Reader.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Reader.Name)
+            </dd>
+        }
 
         <dt>
             @Html.DisplayNameFor(model => model.Author)
@@ -59,13 +63,25 @@
             @Html.DisplayFor(model => model.Isbn)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.BorrowDate)
-        </dt>
+        @if (Model.ReaderId != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.BorrowDate)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.BorrowDate)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.BorrowDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ReturnDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ReturnDate)
+            </dd>
+
+        }
 
     </dl>
 
